@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Task detail</h1>
+    <table th:unless="${task == null}" th:object="${task}">
+        <tr>
+            <td>Title:</td>
+            <td th:text="*{name}"/>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td th:text="*{description}"/>
+        </tr>
+        <tr>
+            <td>Due date:</td>
+            <td th:text="*{date}"/>
+        </tr>
+        <tr th:unless="*{subTasks.isEmpty()}">
+            <td>Subtasks:</td>
+            <td>
+                <table>
+                    <tr th:each="subtask: *{subTasks}">
+                        <td th:text="${subtask.name}"/>
+                        <td th:text="${subtask.description}"/>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <p th:if="${task == null}">Task not found.</p>
+</body>
+</html>

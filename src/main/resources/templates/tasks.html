@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Tasks</h1>
+    <ul th:unless="${tasks.isEmpty()}">
+        <li th:each="task: ${tasks}">
+            <a th:href="'/tasks/' + ${task.id}" th:text="${task.name} + ': due ' + ${task.date}"></a>
+        </li>
+    </ul>
+    <p th:if="${tasks.isEmpty()}">No tasks left to do.</p>
+</body>
+</html>

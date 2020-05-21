@@ -5,6 +5,12 @@
     <title>Title</title>
 </head>
 <body>
+<header>
+    <nav>
+        <button onclick="location.href='?lang=en'">English</button>
+        <button onclick="location.href='?lang=nl'">Nederlands</button>
+    </nav>
+</header>
     <p><a href="/tasks" th:text="#{TaskList}"></a></p>
     <p><a href="/tasks/new" th:text="#{NewTask}"></a></p>
 </body>

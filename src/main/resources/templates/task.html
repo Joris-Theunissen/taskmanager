@@ -5,6 +5,12 @@
     <title>Title</title>
 </head>
 <body>
+<header>
+    <nav>
+        <button onclick="location.href='?lang=en'">English</button>
+        <button onclick="location.href='?lang=nl'">Nederlands</button>
+    </nav>
+</header>
     <h1 th:text="#{TaskDetail}"></h1>
     <table th:unless="${task == null}" th:object="${task}">
         <tr>

@@ -3,11 +3,13 @@ package be.ucll.ip.joristheunissen.taskmanager.service;
 import be.ucll.ip.joristheunissen.taskmanager.domain.SubTask;
 import be.ucll.ip.joristheunissen.taskmanager.domain.Task;
 import be.ucll.ip.joristheunissen.taskmanager.dto.SubTaskDTO;
+import be.ucll.ip.joristheunissen.taskmanager.exceptions.TaskNotFoundException;
 import be.ucll.ip.joristheunissen.taskmanager.repo.TaskRepository;
 import be.ucll.ip.joristheunissen.taskmanager.dto.TaskDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -61,7 +63,9 @@ public class TaskServiceDB implements ITaskService {
     }
 
     @Override
-    public void createSubTask(UUID id, SubTaskDTO subTaskDTO) {
+    public void createSubTask(UUID id, SubTaskDTO subTaskDTO) throws TaskNotFoundException {
+        //if(!repo.findById(id).isPresent()) throw new TaskNotFoundException();
+        List<Task> list = repo.findAll();
         Task task = repo.findById(id).get();
         SubTask subTask = new SubTask(subTaskDTO.getName(), subTaskDTO.getDescription());
         task.addSubTask(subTask);

@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html th:lang="#{Language}" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <h1>Task detail</h1>
+    <h1 th:text="#{TaskDetail}"></h1>
     <table th:unless="${task == null}" th:object="${task}">
         <tr>
-            <td>Title:</td>
+            <td th:text="#{Title}"></td>
             <td th:text="*{name}"/>
         </tr>
         <tr>
-            <td>Description:</td>
+            <td th:text="#{Description}"></td>
             <td th:text="*{description}"/>
         </tr>
         <tr>
-            <td>Due date:</td>
+            <td th:text="#{DueDate}"></td>
             <td th:text="*{date}"/>
         </tr>
         <tr th:unless="*{subTasks.isEmpty()}">
-            <td>Subtasks:</td>
+            <td th:text="#{Subtasks}"></td>
             <td>
                 <table>
                     <tr th:each="subtask: *{subTasks}">
@@ -31,6 +31,6 @@
             </td>
         </tr>
     </table>
-    <p th:if="${task == null}">Task not found.</p>
+    <p th:if="${task == null}" th:text="#{TaskNotFound}"></p>
 </body>
 </html>

@@ -2,6 +2,7 @@ package be.ucll.ip.joristheunissen.taskmanager.controller;
 
 import be.ucll.ip.joristheunissen.taskmanager.dto.SubTaskDTO;
 import be.ucll.ip.joristheunissen.taskmanager.dto.TaskDTO;
+import be.ucll.ip.joristheunissen.taskmanager.exceptions.TaskNotFoundException;
 import be.ucll.ip.joristheunissen.taskmanager.service.ITaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,8 +14,13 @@ import java.util.UUID;
 
 @Controller
 public class TaskController {
+    private final ITaskService taskService;
+
+    // Constructor-based dependency injection instead of field-based, see https://blog.marcnuri.com/field-injection-is-not-recommended/
     @Autowired
-    private ITaskService taskService;
+    public TaskController(ITaskService taskService) {
+        this.taskService = taskService;
+    }
 
     @GetMapping("/")
     public String getIndex() {
@@ -68,7 +74,7 @@ public class TaskController {
     }
 
     @PostMapping("/tasks/{id}/sub/create")
-    public String createSub(@PathVariable(value = "id") UUID id, @Valid @ModelAttribute SubTaskDTO subTask) {
+    public String createSub(@PathVariable(value = "id") UUID id, @Valid @ModelAttribute SubTaskDTO subTask) throws TaskNotFoundException {
         taskService.createSubTask(id, subTask);
         return "redirect:/tasks/{id}";
     }

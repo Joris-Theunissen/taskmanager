@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html th:lang="#{Language}" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <h1 th:text="${edit} ? 'Edit Task' : 'New Task'">New Task</h1>
+    <h1 th:text="${edit} ? #{EditTask} : #{NewTask}"></h1>
     <form method="post" th:action="${edit} ? '/tasks/edit/' + ${id} : '/tasks/create'" th:object="${task}">
         <input type="hidden" name="id" id="id" th:if="${edit}" th:value="${id}"/>
         <table>
             <tr>
                 <td>
-                    <label for="name">Title:</label>
+                    <label for="name" th:text="#{Title}"></label>
                 </td>
                 <td>
                     <input id="name" name="name" type="text" th:field="*{name}">
@@ -19,7 +19,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="description">Description:</label>
+                    <label for="description" th:text="#{Description}"></label>
                 </td>
                 <td>
                     <input id="description" name="description" type="text" th:field="*{description}">
@@ -27,14 +27,14 @@
             </tr>
             <tr>
                 <td>
-                    <label for="date">Due date:</label>
+                    <label for="date" th:text="#{DueDate}"></label>
                 </td>
                 <td>
                     <input id="date" name="date" type="text" th:field="*{date}">
                 </td>
             </tr>
         </table>
-        <input type="submit">
+        <input type="submit" th:value="#{Submit}">
     </form>
 </body>
 </html>

@@ -8,8 +8,9 @@ import java.util.UUID;
 @MappedSuperclass
 public abstract class SuperTask {
     @Id
-    @GeneratedValue
-    private UUID id;
+    //@GeneratedValue
+    // While the previous line is "correct"; it makes testing harder. So we'll do it the manual way for now
+    private UUID id = UUID.randomUUID();
     private String name, description;
 
     public SuperTask() { }

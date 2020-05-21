@@ -10,7 +10,7 @@ import java.util.Map;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Task extends SuperTask {
     private String date;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER) // TODO: Ask why it doesn't initialize during tests
     private List<SubTask> subtasks = new ArrayList<>();
 
     public Task() { }

@@ -5,12 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<header>
-    <nav>
-        <button onclick="location.href='?lang=en'">English</button>
-        <button onclick="location.href='?lang=nl'">Nederlands</button>
-    </nav>
-</header>
+<header th:replace="fragments/header :: header"></header>
     <h1 th:text="${edit} ? #{EditTask} : #{NewTask}"></h1>
     <form method="post" th:action="${edit} ? '/tasks/edit/' + ${id} : '/tasks/create'" th:object="${task}">
         <input type="hidden" name="id" id="id" th:if="${edit}" th:value="${id}"/>

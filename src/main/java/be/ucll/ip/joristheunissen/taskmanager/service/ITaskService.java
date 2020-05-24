@@ -17,4 +17,6 @@ public interface ITaskService {
     void editTask(UUID id, TaskDTO TaskDTO);
 
     void createSubTask(UUID id, SubTaskDTO subTask) throws TaskNotFoundException;
+
+    void deleteAll();
 }

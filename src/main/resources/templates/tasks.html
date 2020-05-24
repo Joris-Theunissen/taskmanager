@@ -5,12 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<header>
-    <nav>
-        <button onclick="location.href='?lang=en'">English</button>
-        <button onclick="location.href='?lang=nl'">Nederlands</button>
-    </nav>
-</header>
+<header th:replace="fragments/header :: header"></header>
     <h1 th:text="#{Tasks}"></h1>
     <ul th:unless="${tasks.isEmpty()}">
         <li th:each="task: ${tasks}">

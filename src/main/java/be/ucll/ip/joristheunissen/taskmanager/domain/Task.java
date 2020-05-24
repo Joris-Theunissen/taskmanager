@@ -1,10 +1,7 @@
 package be.ucll.ip.joristheunissen.taskmanager.domain;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -17,6 +14,11 @@ public class Task extends SuperTask {
 
     public Task(String name, String description, String date) {
         super(name, description);
+        this.date = date;
+    }
+
+    public Task(String name, String description, String date, UUID id) {
+        super(name, description, id);
         this.date = date;
     }
 

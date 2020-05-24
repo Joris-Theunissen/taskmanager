@@ -51,7 +51,11 @@ public class TaskServiceDB implements ITaskService {
 
     @Override
     public void createTask(TaskDTO taskDTO) {
-        Task task = new Task(taskDTO.getName(), taskDTO.getDescription(), taskDTO.getDate());
+        Task task;
+        if(taskDTO.getId() != null) // UUID is given; right now only through tests.
+            task = new Task(taskDTO.getName(), taskDTO.getDescription(), taskDTO.getDate(), taskDTO.getId());
+        else
+            task = new Task(taskDTO.getName(), taskDTO.getDescription(), taskDTO.getDate());
         repo.save(task);
     }
 
@@ -64,11 +68,16 @@ public class TaskServiceDB implements ITaskService {
 
     @Override
     public void createSubTask(UUID id, SubTaskDTO subTaskDTO) throws TaskNotFoundException {
-        //if(!repo.findById(id).isPresent()) throw new TaskNotFoundException();
+        if(!repo.findById(id).isPresent()) throw new TaskNotFoundException();
         List<Task> list = repo.findAll();
         Task task = repo.findById(id).get();
         SubTask subTask = new SubTask(subTaskDTO.getName(), subTaskDTO.getDescription());
         task.addSubTask(subTask);
         repo.save(task);
+    }
+
+    @Override
+    public void deleteAll() {
+        repo.deleteAll();
     }
 }

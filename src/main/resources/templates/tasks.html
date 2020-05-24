@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<header th:replace="fragments/header :: header"></header>
     <h1 th:text="#{Tasks}"></h1>
     <ul th:unless="${tasks.isEmpty()}">
         <li th:each="task: ${tasks}">

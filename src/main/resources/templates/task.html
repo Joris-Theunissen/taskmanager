@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<header th:replace="fragments/header :: header"></header>
     <h1 th:text="#{TaskDetail}"></h1>
     <table th:unless="${task == null}" th:object="${task}">
         <tr>

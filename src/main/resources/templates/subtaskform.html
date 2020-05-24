@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<header th:replace="fragments/header :: header"></header>
     <h1 th:text="#{CreateSubtask}"></h1>
     <form method="post" th:action="${edit} ? '/tasks/' + ${id} + '/sub/edit/' + ${subId} : '/tasks/' + ${id} + '/sub/create'" th:object="${subtask}">
         <input type="hidden" name="id" id="id" th:if="${edit}" th:value="${id}"/>

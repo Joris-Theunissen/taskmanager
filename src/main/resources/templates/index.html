@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<header th:replace="fragments/header :: header"></header>
     <p><a href="/tasks" th:text="#{TaskList}"></a></p>
     <p><a href="/tasks/new" th:text="#{NewTask}"></a></p>
 </body>

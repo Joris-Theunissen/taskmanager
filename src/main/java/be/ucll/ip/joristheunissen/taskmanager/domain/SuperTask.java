@@ -20,6 +20,12 @@ public abstract class SuperTask {
         this.description = description;
     }
 
+    public SuperTask(String name, String description, UUID id) {
+        this.name = name;
+        this.description = description;
+        this.id = id;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

@@ -1,19 +1,14 @@
 package be.ucll.ip.joristheunissen.taskmanager;
 
-import be.ucll.ip.joristheunissen.taskmanager.domain.Task;
 import be.ucll.ip.joristheunissen.taskmanager.dto.SubTaskDTO;
 import be.ucll.ip.joristheunissen.taskmanager.dto.TaskDTO;
 import be.ucll.ip.joristheunissen.taskmanager.exceptions.TaskNotFoundException;
-import be.ucll.ip.joristheunissen.taskmanager.repo.TaskRepository;
 import be.ucll.ip.joristheunissen.taskmanager.service.ITaskService;
-import org.hibernate.Hibernate;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,9 +19,10 @@ public class TaskServiceTest {
     @Autowired
     private ITaskService taskService;
 
-    //For the second test only
-    @Autowired
-    private TaskRepository repository;
+    @AfterEach
+    public void cleanUp() {
+        taskService.deleteAll();
+    }
 
     @Test
     public void testGetTasks() {
@@ -51,12 +47,14 @@ public class TaskServiceTest {
     @Test
     public void testGetSubTasks() {
         UUID uuid = UUID.randomUUID();
-        Task task = new Task();
-        task.setName("Name");
-        task.setDescription("Description");
-        task.setDate("Tomorrow");
-        task.setId(uuid);
-        repository.save(task);
+
+        TaskDTO taskDTO = new TaskDTO();
+        taskDTO.setName("Name");
+        taskDTO.setDescription("Description");
+        taskDTO.setDate("Tomorrow");
+        taskDTO.setId(uuid);
+        taskService.createTask(taskDTO);
+        // The previous lines are presumed to work if the previous test succeeded; the tests do not share data however.
         // setup
         SubTaskDTO subTaskDTO = new SubTaskDTO();
         subTaskDTO.setName("Ook een naam");
